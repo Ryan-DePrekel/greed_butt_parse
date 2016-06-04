@@ -4,6 +4,6 @@ The max number of dailies available in the json data is the 10 most recent daili
 
 #Usage
 Current usage:
-python greed_butt_parse.py <steamID> <day_index> 
+python greed_butt_parse.py (steamID) (day_index)
 
 day_index being which daily you want to pull, 0 being most recent and 9 being least recent
