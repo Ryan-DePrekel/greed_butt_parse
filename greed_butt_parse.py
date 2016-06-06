@@ -5,7 +5,9 @@
 # Usage 1: supply args of steam ID and the day you want 0 being most recent 9 being last data available
 # 76561198046935999
 
-import json, urllib, sys
+import json
+import urllib
+import sys
 
 json_build = "/?json"
 
@@ -74,14 +76,14 @@ class Daily:
 		print "Damage Penalty: -%d Time Penalty: -%d Item Penalty: -%d Total Hits: %d" % (self.damage, self.time, self.item, self.hits)
 
 #This will hold the player data requested from greedbutt.com
-#Name, Number of runs, Average Rank, Best Rank, Data from last 10 dailies
+#Name, Number of runs, Average Rank, Best Rank, Data from daily requested
 class Player:
 	#Init values
 	name = None
 	runs = 0
 	avg_rank = 0
 	best_rank = 0
-	dailies = []
+	daily = None
 
 	#Consume the data for use
 	def __init__(self, argv):
@@ -97,14 +99,13 @@ class Player:
 		self.runs = self.data['player']['stats']['runs']
 		self.avg_rank = self.data['player']['stats']['avg_rank']
 		self.best_rank = self.data['player']['stats']['best_rank']
-		for i in range (0,10):
-			self.dailies.append(Daily(self.data['player']['history'][i]['hash']))
+		self.daily = Daily(self.data['player']['history'][self.day_flag]['hash'])
 
 	def display_player(self):
 		print "Name: %s   Total Runs: %d   Average Rank: %d  Best Rank:  %d" % ( self.name, self.runs, self.avg_rank, self.best_rank)
 
 	def show_stats(self):
-		self.dailies[self.day_flag].display_daily()
+		self.daily.display_daily()
 
 try:
 	player = Player(sys.argv)
