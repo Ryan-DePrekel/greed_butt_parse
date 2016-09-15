@@ -25,17 +25,17 @@ class Daily:
 	date = None
 	rank = 0
 	entries = 0
-	stage = 0 
-	schwag = 0 
+	stage = 0
+	schwag = 0
 	xxx = 0
-	lamb = 0 
+	lamb = 0
 	mega = 0
 	rush = 0
 	exploration = 0
 	damage = 0
-	time = 0 
+	time = 0
 	item = 0
-	hits = 0 
+	hits = 0
 	percentile = 0.0
 
 	def __init__(self, day_hash):
@@ -107,11 +107,11 @@ class Player:
 	def show_stats(self):
 		self.daily.display_daily()
 
-try:
-	player = Player(sys.argv)
-	player.get_data()
-	player.display_player()
-	player.show_stats()
-except IndexError as e:
-		print "Usage Error: python greed_butt_parse.py <steamID> <day index>"
-	
+if __name__ == "__main__":
+	try:
+		player = Player(sys.argv)
+		player.get_data()
+		player.display_player()
+		player.show_stats()
+	except IndexError as e:
+			print "Usage Error: python greed_butt_parse.py <steamID> <day index>"
