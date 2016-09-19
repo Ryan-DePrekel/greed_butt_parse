@@ -3,6 +3,7 @@
 #Other forms of usage would be to supply it a day and steam ID to get the daily score
 #This will be done by parsing the JSON data at the requested page by appending /?json to each URL
 # Usage 1: supply args of steam ID and the day you want 0 being most recent 9 being last data available
+# Current Usage: python greed_butt_parse.py <steamID> <day_index> if no index if provided then defaults to most recent
 # 76561198046935999
 
 import json
@@ -89,7 +90,7 @@ class Player:
 	def __init__(self, argv):
 		url = "https://greedbutt.com/player/" + argv[1] + json_build
 		self.data = json_reader(url)
-		if argv[2] == None:
+		if len(argv) == 2:
 			self.day_flag = 0
 		else:
 			self.day_flag = int(argv[2])
@@ -102,7 +103,7 @@ class Player:
 		self.daily = Daily(self.data['player']['history'][self.day_flag]['hash'])
 
 	def display_player(self):
-		print "Name: %s   Total Runs: %d   Average Rank: %d  Best Rank:  %d" % ( self.name, self.runs, self.avg_rank, self.best_rank)
+		print "Name: %s   Total Runs: %d   Average Rank: %d  Best Rank:  %d" % (self.name, self.runs, self.avg_rank, self.best_rank)
 
 	def show_stats(self):
 		self.daily.display_daily()
